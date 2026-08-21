@@ -9,13 +9,12 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//Essa é a classe principal do servidor. Ou seja, é a primeira a ser executada quando o servidor iniciar.
-
 public class Principal {
     public static void main(String[] args) {
         ServerSocket servidor; //Objeto do servidor socket
-        int idUnico = 0;
-         //Teste de conexão com o banco
+        int idUnico = 0; //Variável para definir um código para cada cliente
+        
+        //Teste de conexão com o banco
         if (Conector.getConnection() != null){
             System.out.println("Conectado com sucesso no banco de dados");
         }
@@ -38,6 +37,4 @@ public class Principal {
         }
         
     }
-   
-    
 }

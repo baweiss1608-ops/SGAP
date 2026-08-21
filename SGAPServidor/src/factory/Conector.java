@@ -1,7 +1,7 @@
 
 package factory;
 
-import java.sql.*; //importando as bibliotecas do jdbc
+import java.sql.*;
 
 public class Conector {
      private static Connection con; //objeto que guarda a conexão com o banco. 
@@ -24,6 +24,5 @@ public class Conector {
             e.printStackTrace();
             return null;
         }
-        
     }
 }
