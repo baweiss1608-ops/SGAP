@@ -12,7 +12,7 @@ public class Conector {
     
         try {
             String url = "jdbc:mysql://localhost:3306/";
-            String banco = "petshop";
+            String banco = "sgap";
             String usuario = "root";
             String senha = "";
             

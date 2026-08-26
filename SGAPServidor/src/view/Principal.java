@@ -28,8 +28,8 @@ public class Principal {
                 System.out.println("Um novo cliente conectou: " +cliente);
                 idUnico++;
                 System.out.println("Iniciando uma nova Thread para o cliente " +idUnico);
-                TrataClienteController tcc = new TrataClienteController(cliente, idUnico);
-                tcc.start();
+              //  TrataClienteController tcc = new TrataClienteController(cliente, idUnico);
+            //    tcc.start();
             }
             
         } catch (Exception ex) {
