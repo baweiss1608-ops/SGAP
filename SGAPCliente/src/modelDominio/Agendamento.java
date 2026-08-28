@@ -1,16 +1,23 @@
 package modelDominio;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 
 public class Agendamento implements Serializable {
 
     public static final long serialVersionUID = 123456789L;
+
+    public static final int PENDENTE = 0;
+    public static final int CONFIRMADO = 1;
+    public static final int RECUSADO = 2;
+    
     private int codAgendamento;
     private Paciente paciente;
     private Psicologo psicologo;
-    private Date dataHora;
-    private String status;
+    private Time horario;
+    private Date dia;
+    private int status;
 
     // Getter e setter do código do agendamento
     public int getCodAgendamento() {
@@ -39,38 +46,51 @@ public class Agendamento implements Serializable {
         this.psicologo = psicologo;
     }
 
-    // Getter e setter da data e hora do agendamento
-    public Date getDataHora() {
-        return dataHora;
+    // Getter e setter do horário
+    public Time getHorario() {
+        return horario;
     }
 
-    public void setDataHora(Date dataHora) {
-        this.dataHora = dataHora;
+    public void setHorario(Time horario) {
+        this.horario = horario;
     }
 
-    // Getter e setter do status do agendamento
-    public String getStatus() {
+    // Getter e setter do dia
+    public Date getDia() {
+        return dia;
+    }
+
+    public void setDia(Date dia) {
+        this.dia = dia;
+    }
+
+    // Getter e setter do status
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
     // Construtor para SELECTS e UPDATES
-    public Agendamento(int codAgendamento, Paciente paciente, Psicologo psicologo, Date dataHora, String status) {
+    public Agendamento(int codAgendamento, Paciente paciente, Psicologo psicologo, Time horario, Date dia, int status) {
+
         this.codAgendamento = codAgendamento;
         this.paciente = paciente;
         this.psicologo = psicologo;
-        this.dataHora = dataHora;
+        this.horario = horario;
+        this.dia = dia;
         this.status = status;
     }
 
     // Construtor para INSERT
-    public Agendamento(Paciente paciente, Psicologo psicologo, Date dataHora, String status) {
+    public Agendamento(Paciente paciente, Psicologo psicologo, Time horario, Date dia, int status) {
+
         this.paciente = paciente;
         this.psicologo = psicologo;
-        this.dataHora = dataHora;
+        this.horario = horario;
+        this.dia = dia;
         this.status = status;
     }
 
@@ -79,10 +99,10 @@ public class Agendamento implements Serializable {
         this.codAgendamento = codAgendamento;
     }
 
+    // Dados do agendamento
     @Override
     public String toString() {
-        return "Agendamento{" + "codAgendamento=" + codAgendamento + ", paciente=" + paciente + ", psicologo=" + psicologo + ", dataHora="
-                + dataHora + ", status=" + status + '}';
+        return "Agendamento{" + "codAgendamento=" + codAgendamento + ", paciente=" + paciente + ", psicologo=" + psicologo + ","
+                                                         + " horario=" + horario + ", dia=" + dia + ", status=" + status + '}';
     }
-
 }
