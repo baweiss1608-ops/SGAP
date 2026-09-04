@@ -4,7 +4,7 @@ package modelDominio;
 import java.io.Serializable;
 
 public class Paciente  implements Serializable {
-     public static final long serialVersionUID = 123456789L;
+      public static final long serialVersionUID = 123456789L;
 
     private int codPaciente;
     private String nome;
@@ -113,9 +113,10 @@ public class Paciente  implements Serializable {
         this.senha = senha;
     }
 
+    // Mostra os dados do paciente para facilitar o Debug
     @Override
     public String toString() {
-        return "Paciente{" 
+        return "Paciente{"
                 + "codPaciente=" + codPaciente
                 + ", nome=" + nome
                 + ", contato=" + contato
@@ -124,5 +125,4 @@ public class Paciente  implements Serializable {
                 + ", email=" + email
                 + '}';
     }
-    
 }

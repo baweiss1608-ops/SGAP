@@ -6,12 +6,14 @@ import java.util.Date;
 
 public class Agendamento implements Serializable {
 
-    public static final long serialVersionUID = 123456789L;
+      public static final long serialVersionUID = 123456789L;
 
+    // Status do agendamento
     public static final int PENDENTE = 0;
     public static final int CONFIRMADO = 1;
-    public static final int RECUSADO = 2;
-    
+    public static final int CANCELADO = 2;
+    public static final int CONCLUIDO = 3;
+
     private int codAgendamento;
     private Paciente paciente;
     private Psicologo psicologo;
@@ -74,7 +76,8 @@ public class Agendamento implements Serializable {
     }
 
     // Construtor para SELECTS e UPDATES
-    public Agendamento(int codAgendamento, Paciente paciente, Psicologo psicologo, Time horario, Date dia, int status) {
+    public Agendamento(int codAgendamento, Paciente paciente,
+            Psicologo psicologo, Time horario, Date dia, int status) {
 
         this.codAgendamento = codAgendamento;
         this.paciente = paciente;
@@ -85,7 +88,8 @@ public class Agendamento implements Serializable {
     }
 
     // Construtor para INSERT
-    public Agendamento(Paciente paciente, Psicologo psicologo, Time horario, Date dia, int status) {
+    public Agendamento(Paciente paciente, Psicologo psicologo,
+            Time horario, Date dia, int status) {
 
         this.paciente = paciente;
         this.psicologo = psicologo;
@@ -99,10 +103,16 @@ public class Agendamento implements Serializable {
         this.codAgendamento = codAgendamento;
     }
 
-    // Dados do agendamento
+    // Mostra os dados do agendamento para facilitar o Debug
     @Override
     public String toString() {
-        return "Agendamento{" + "codAgendamento=" + codAgendamento + ", paciente=" + paciente + ", psicologo=" + psicologo + ","
-                                                         + " horario=" + horario + ", dia=" + dia + ", status=" + status + '}';
+        return "Agendamento{"
+                + "codAgendamento=" + codAgendamento
+                + ", paciente=" + paciente
+                + ", psicologo=" + psicologo
+                + ", horario=" + horario
+                + ", dia=" + dia
+                + ", status=" + status
+                + '}';
     }
 }

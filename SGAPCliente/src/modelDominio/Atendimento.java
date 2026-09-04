@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class Atendimento implements Serializable {
 
-    public static final long serialVersionUID = 123456789L;
+      public static final long serialVersionUID = 123456789L;
 
     private int codAtendimento;
     private Agendamento agendamento;
@@ -72,6 +72,7 @@ public class Atendimento implements Serializable {
         this.codAtendimento = codAtendimento;
     }
 
+    // Mostra os dados do atendimento para facilitar o Debug
     @Override
     public String toString() {
         return "Atendimento{"
