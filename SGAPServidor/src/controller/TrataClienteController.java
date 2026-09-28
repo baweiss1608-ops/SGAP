@@ -42,7 +42,11 @@ public class TrataClienteController extends Thread {
             while (!comando.equalsIgnoreCase("fim")) { // Enquanto o comando não for fim, ele fica dentro do loop
                 System.out.println("Cliente " + idUnico + " enviou o comando " + comando);
                 // TODO: retornaremos aqui quando implementarmos os comandos da comunicação com o cliente.
-
+                
+                
+                
+                
+                
                 // Aqui teremos vários ifs e elses testando os comandos recebidos.
                 // NÃO APAGAR A PRÓXIMA LINHA POIS ELA FAZ A RELEITURA DO PRÓXIMO COMANDO
                 comando = (String) in.readObject();

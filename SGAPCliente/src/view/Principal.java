@@ -21,23 +21,23 @@ public class Principal {
         // Fazer a conexão com o servidor
         try {
 
-            // 1. Criar conexão com o servidor
+            // Cria conexão com o servidor
             Socket socket = new Socket("localhost", 12345);
 
-            // 2. Criar o objeto out para enviar comandos
+            // Cria o objeto out para enviar comandos
             // para o servidor
             ObjectOutputStream out =
                     new ObjectOutputStream(socket.getOutputStream());
 
-            // 3. Criar o objeto in para receber respostas
+            // Cria o objeto in para receber respostas
             // do servidor
             ObjectInputStream in =
                     new ObjectInputStream(socket.getInputStream());
 
-            // Iniciar o ConexaoController
+            // Inicia o ConexaoController
             ccont = new ConexaoController(out, in);
 
-            // Abrir a primeira tela do sistema
+            // Abre a primeira tela do sistema
             TelaLogin telaLogin = new TelaLogin();
             telaLogin.setVisible(true);
 
