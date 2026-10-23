@@ -157,7 +157,7 @@ public class TrataClienteController extends Thread {
                 } else if (comando.equalsIgnoreCase("AgendamentoLista")) {
 
                     AgendamentoDao aDao = new AgendamentoDao();
-                    ArrayList<AgendamentoDao.Agendamento> lista = aDao.getLista();
+                    ArrayList<Agendamento> lista = aDao.getLista();
 
                     out.writeObject(lista);
 

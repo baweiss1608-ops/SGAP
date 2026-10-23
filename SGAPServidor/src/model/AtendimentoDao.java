@@ -13,21 +13,20 @@ import modelDominio.Psicologo;
 public class AtendimentoDao {
 
     public ArrayList<Atendimento> getLista() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    throw new UnsupportedOperationException();
+}
 
-    public boolean inserir(Atendimento a) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+public boolean inserir(Atendimento a) {
+    throw new UnsupportedOperationException();
+}
 
-    public boolean editar(Atendimento a) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+public boolean editar(Atendimento a) {
+    throw new UnsupportedOperationException();
+}
 
-    public boolean excluir(Atendimento a) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-  
+public boolean excluir(Atendimento a) {
+    throw new UnsupportedOperationException();
+}
 public class Agendamento implements Serializable {
 
       public static final long serialVersionUID = 123456789L;
