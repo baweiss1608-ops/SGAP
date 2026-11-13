@@ -4,7 +4,11 @@ package view;
 import java.security.MessageDigest;
 import modelDominio.Psicologo;
 import javax.swing.JOptionPane;
-
+import view.Principal;
+/*
+    private void dispose() {
+        throw new UnsupportedOperationException("Not supported yet."); 
+}*/
 public class TelaLogin extends javax.swing.JFrame {
 
     /**
@@ -74,6 +78,11 @@ public class TelaLogin extends javax.swing.JFrame {
         });
 
         jTextSenha.setText("Senha");
+        jTextSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextSenhaActionPerformed(evt);
+            }
+        });
 
         jButtonEntrar.setText("Entrar");
         jButtonEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -179,19 +188,113 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextEmailActionPerformed
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
-         
+         // String senha = new String (jTextSenha.getPassword());
+        //Usuario user = new Usuario(jTextEmail.getText(),senha); //o user tentará fazer um login no sistema 
+       /*   try {
+
+        // Captura a senha digitada
+        char[] senhaChars = jTextSenha.getPassword();
+        String senha = new String(senhaChars);
+
+        // Gera o hash SHA-256
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[] messageDigest = md.digest(senha.getBytes("UTF-8"));
+
+        StringBuilder sb = new StringBuilder();
+
+        for (byte b : messageDigest) {
+            sb.append(String.format("%02x", 0xFF & b));
+        }
+
+        String senhaCriptografada = sb.toString();
+
+        // Cria o usuário para autenticação
+        Usuario user = new Usuario(
+                jTextEmail.getText(),
+                senhaCriptografada
+        );
+
+        System.out.println(user);
+
+        // Envia ao servidor
+        Usuario userLogado = Principal.ccont.usuarioLogin(user);
+
+      if (userLogado != null) {
+
+            Principal.ccont.setUsuarioLogado(userLogado);
+
+            TelaPrincipal telaPrincipal = new TelaPrincipal();
+            telaPrincipal.setVisible(true);
+
+            dispose();
+
+        } else {
+
+            jLabelInvalido.setVisible(true);
+
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(
+                this,
+                "Erro ao realizar login:\n" + e.getMessage()
+        );
+    }*/
 // lendo os campos
     String email = jTextEmail.getText();
     String senha = jTextSenha.getText();
 
-    
-    
+     try {
+
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte messageDigest[] = md.digest(senha.getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            for (byte b : messageDigest) {
+                sb.append(String.format("%02x", 0xFF & b));
+            }
+            String senhaCriptografada = sb.toString();
+
+            // criando o usuario
+            Psicologo user = new Psicologo(email, senhaCriptografada);
+            // enviado para o servidor
+            Psicologo userLogado = view.Principal.ccont.psicologoLogin(user);
+
+            if (userLogado != null)   {
+                // usuario existe entao posso salvar num local para poder acessar 
+                // quando precisar
+                view.Principal.ccont.setPsicologoLogado(userLogado);
+                // usuario existe entao posso abrir a tela principal do sistema
+                MinhaConta telaPrincipal = new MinhaConta();
+                telaPrincipal.setVisible(true);
+                dispose();
+             } else {
+
+            JOptionPane.showMessageDialog(this, "E-mail ou senha incorretos!");
+
+        }
+
+    } catch (Exception e) {
+
+        e.printStackTrace();
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Erro ao realizar login: " + e.getMessage()
+        );
+
+    }
+
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
          // fechando a tela
     dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jTextSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextSenhaActionPerformed
 
     /**
      * @param args the command line arguments

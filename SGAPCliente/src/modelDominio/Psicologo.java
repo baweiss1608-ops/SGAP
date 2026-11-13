@@ -156,6 +156,10 @@ public class Psicologo implements Serializable {
         this.codPsicologo = codPsicologo;
     }
 
+    public Psicologo(String email, String senha) {
+        this.email = email;
+        this.senha = senha;
+    }
     // Dados do psicólogo
     @Override
     public String toString() {
