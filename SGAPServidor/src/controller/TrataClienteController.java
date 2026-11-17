@@ -54,6 +54,7 @@ public class TrataClienteController extends Thread {
                     out.writeObject("ok");
 
                     Psicologo p = (Psicologo) in.readObject();
+                    System.out.print(p);
 
                     PsicologoDao pDao = new PsicologoDao();
                     Psicologo psicologoLogado = pDao.login(p);
