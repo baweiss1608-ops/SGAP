@@ -4,6 +4,8 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Bárbara Weiss
@@ -48,6 +50,11 @@ public class excluir_descricao extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(218, 188, 248));
         jButton2.setText("NÃO");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -95,7 +102,22 @@ public class excluir_descricao extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+         int resposta = JOptionPane.showConfirmDialog(
+        this,
+        "Deseja realmente excluir?",
+        "Confirmar exclusão",
+        JOptionPane.YES_NO_OPTION
+    );
+
+    if (resposta == JOptionPane.YES_OPTION) {
+        // Código para excluir o registro
+        dispose();
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
