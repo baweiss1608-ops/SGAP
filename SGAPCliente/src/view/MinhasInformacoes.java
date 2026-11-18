@@ -3,8 +3,6 @@ package view;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import view.descricao;
-
 /**
  *
  * @author ferna
