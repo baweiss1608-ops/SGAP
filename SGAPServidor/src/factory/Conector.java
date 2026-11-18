@@ -9,7 +9,7 @@ public class Conector {
     
     public static Connection getConnection (){ //método que de fato faz a conexão com o banco
     //está como static para não precisar declarar um objeto de conector para usar
-    
+   
         try {
             String url = "jdbc:mysql://localhost:3306/";
             String banco = "sgap";
