@@ -4,6 +4,9 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ferna
@@ -56,10 +59,25 @@ public class Pacientes extends javax.swing.JFrame {
         );
 
         jButton1.setText("Voltar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Adicionar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Excluir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -86,7 +104,7 @@ public class Pacientes extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addGap(0, 23, Short.MAX_VALUE))
+                .addGap(0, 420, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Pacientes");
@@ -145,6 +163,63 @@ public class Pacientes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new Principal().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String nome = JOptionPane.showInputDialog(this, "Digite o nome do paciente:");
+
+    if (nome == null || nome.trim().isEmpty()) {
+        return;
+    }
+
+    String cpf = JOptionPane.showInputDialog(this, "Digite o CPF:");
+
+    if (cpf == null || cpf.trim().isEmpty()) {
+        return;
+    }
+
+    String telefone = JOptionPane.showInputDialog(this, "Digite o telefone:");
+
+    if (telefone == null || telefone.trim().isEmpty()) {
+        return;
+    }
+
+    String email = JOptionPane.showInputDialog(this, "Digite o e-mail:");
+
+    if (email == null || email.trim().isEmpty()) {
+        return;
+    }
+
+    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+
+    modelo.addRow(new Object[]{nome, cpf, telefone, email});
+
+    JOptionPane.showMessageDialog(this, "Paciente adicionado com sucesso!");
+}
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+         int linha = jTable1.getSelectedRow();
+
+    if (linha != -1) {
+
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+
+        modelo.removeRow(linha);
+
+        JOptionPane.showMessageDialog(this, "Paciente excluído com sucesso!");
+
+    } else {
+
+        JOptionPane.showMessageDialog(this, "Selecione um paciente para excluir.");
+
+    }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

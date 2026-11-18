@@ -1,8 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package view;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import view.descricao;
 
 /**
  *
@@ -56,10 +57,25 @@ public class MinhasInformacoes extends javax.swing.JFrame {
         );
 
         jButton1.setText("Voltar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Adicionar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Excluir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -145,6 +161,55 @@ public class MinhasInformacoes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
+
+    if (evt.getClickCount() == 2) {
+
+        int linha = jTable1.getSelectedRow();
+
+        String descricao = jTable1.getValueAt(linha, 0).toString();
+
+        descricao tela = new descricao(descricao);
+
+        tela.setVisible(true);
+    }
+}
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+          new Principal().setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String nome = JOptionPane.showInputDialog("Digite seu nome:");
+    if (nome == null || nome.trim().isEmpty()) return;
+
+    String cpf = JOptionPane.showInputDialog("Digite seu CPF:");
+    if (cpf == null || cpf.trim().isEmpty()) return;
+
+    String email = JOptionPane.showInputDialog("Digite seu e-mail:");
+    if (email == null || email.trim().isEmpty()) return;
+
+    String telefone = JOptionPane.showInputDialog("Digite seu telefone:");
+    if (telefone == null || telefone.trim().isEmpty()) return;
+
+    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+
+    modelo.addRow(new Object[]{nome, cpf, email, telefone});
+}
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int linha = jTable1.getSelectedRow();
+
+    if (linha != -1) {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.removeRow(linha);
+    } else {
+        JOptionPane.showMessageDialog(this, "Selecione uma informação para excluir.");
+    }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

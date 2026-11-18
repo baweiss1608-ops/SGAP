@@ -4,18 +4,172 @@
  */
 package view;
 
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 /**
  *
  * @author ferna
  */
 public class Agendamento extends javax.swing.JFrame {
-
+    
+private JTable tabela;
+    private DefaultTableModel modelo;
     /**
      * Creates new form Agendamento
      */
     public Agendamento() {
-        initComponents();
+      
+        setTitle("Agendamento");
+        setSize(1057, 557);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+
+        // Cores da tela
+        Color roxo = new Color(196, 83, 245);
+        Color lilas = new Color(201, 174, 222);
+        Color fundo = new Color(218, 190, 244);
+
+        // Cabeçalho superior
+        JPanel cabecalho = new JPanel();
+        cabecalho.setBackground(roxo);
+        cabecalho.setPreferredSize(new Dimension(0, 45));
+        add(cabecalho, BorderLayout.NORTH);
+
+        // Painel dos botões
+        JPanel painelBotoes = new JPanel(new GridLayout(1, 3));
+        painelBotoes.setBackground(lilas);
+        painelBotoes.setPreferredSize(new Dimension(0, 80));
+
+        JButton btnVoltar = new JButton("Voltar");
+        JButton btnAdicionar = new JButton("Adicionar");
+        JButton btnExcluir = new JButton("Excluir");
+
+        painelBotoes.add(btnVoltar);
+        painelBotoes.add(btnAdicionar);
+        painelBotoes.add(btnExcluir);
+
+        // Organiza os botões
+        JPanel painelSuperior = new JPanel(new BorderLayout());
+        painelSuperior.add(painelBotoes, BorderLayout.CENTER);
+
+        add(painelSuperior, BorderLayout.CENTER);
+
+        // Painel principal
+        JPanel painelPrincipal = new JPanel();
+        painelPrincipal.setBackground(fundo);
+        painelPrincipal.setLayout(
+            new BoxLayout(painelPrincipal, BoxLayout.Y_AXIS)
+        );
+
+        // Título
+        JLabel titulo = new JLabel("Agendamento");
+        titulo.setFont(new Font("Arial", Font.PLAIN, 14));
+        titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        painelPrincipal.add(Box.createVerticalStrut(32));
+        painelPrincipal.add(titulo);
+        painelPrincipal.add(Box.createVerticalStrut(24));
+
+        // Tabela
+        String[] colunas = {
+            "Paciente", "Psicólogo", "Data", "Horário"
+        };
+
+        modelo = new DefaultTableModel(colunas, 0);
+
+        tabela = new JTable(modelo);
+        tabela.setRowHeight(28);
+        tabela.setSelectionMode(
+            ListSelectionModel.SINGLE_SELECTION
+        );
+
+        JScrollPane rolagem = new JScrollPane(tabela);
+        rolagem.setPreferredSize(new Dimension(420, 323));
+        rolagem.setMaximumSize(new Dimension(420, 323));
+        rolagem.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        painelPrincipal.add(rolagem);
+
+        // Adiciona painel principal na tela
+        add(painelPrincipal, BorderLayout.SOUTH);
+
+        // Botão voltar
+        btnVoltar.addActionListener(e -> {
+            dispose();
+        });
+
+        // Botão adicionar
+        btnAdicionar.addActionListener(e -> adicionarAgendamento());
+
+        // Botão excluir
+        btnExcluir.addActionListener(e -> {
+            int linha = tabela.getSelectedRow();
+
+            if (linha != -1) {
+                modelo.removeRow(linha);
+            } else {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Selecione um agendamento para excluir."
+                );
+            }
+        });
     }
+
+    // Método para adicionar agendamento
+    private void adicionarAgendamento() {
+
+        JTextField paciente = new JTextField();
+        JTextField psicologo = new JTextField();
+        JTextField data = new JTextField();
+        JTextField horario = new JTextField();
+
+        Object[] campos = {
+            "Paciente:", paciente,
+            "Psicólogo:", psicologo,
+            "Data:", data,
+            "Horário:", horario
+        };
+
+        int opcao = JOptionPane.showConfirmDialog(
+            this,
+            campos,
+            "Novo Agendamento",
+            JOptionPane.OK_CANCEL_OPTION
+        );
+
+        if (opcao == JOptionPane.OK_OPTION) {
+
+            if (paciente.getText().trim().isEmpty()
+                || psicologo.getText().trim().isEmpty()
+                || data.getText().trim().isEmpty()
+                || horario.getText().trim().isEmpty()) {
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Preencha todos os campos."
+                );
+
+            } else {
+                modelo.addRow(new Object[]{
+                    paciente.getText(),
+                    psicologo.getText(),
+                    data.getText(),
+                    horario.getText()
+                });
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new TelaAgendamento().setVisible(true);
+        });
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.

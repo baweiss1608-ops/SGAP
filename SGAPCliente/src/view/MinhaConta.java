@@ -4,6 +4,8 @@
  */
 package view;
 
+import javax.swing.*;
+import java.awt.*;
 /**
  *
  * @author ferna
@@ -15,6 +17,54 @@ public class MinhaConta extends javax.swing.JFrame {
      */
     public MinhaConta() {
         initComponents();
+         setTitle("SGAP Acolher");
+        setSize(1057, 570);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+
+        // Cores
+        Color roxo = new Color(195, 83, 243);
+        Color lilas = new Color(197, 171, 222);
+        Color fundo = new Color(218, 190, 244);
+
+        // Faixa superior
+        JPanel faixaSuperior = new JPanel();
+        faixaSuperior.setBackground(roxo);
+        faixaSuperior.setPreferredSize(new Dimension(0, 39));
+        add(faixaSuperior, BorderLayout.NORTH);
+
+        // Segunda faixa
+        JPanel faixaSecundaria = new JPanel();
+        faixaSecundaria.setBackground(lilas);
+        faixaSecundaria.setPreferredSize(new Dimension(0, 86));
+        add(faixaSecundaria, BorderLayout.CENTER);
+
+        // Painel principal
+        JPanel painelPrincipal = new JPanel();
+        painelPrincipal.setBackground(fundo);
+        painelPrincipal.setLayout(null);
+
+        // Botões do menu
+        JButton btnInformacoes = new JButton("Minhas informações");
+        JButton btnPacientes = new JButton("Pacientes");
+        JButton btnAgendamento = new JButton("Agendamento/Atendimento");
+        JButton btnSair = new JButton("Sair");
+
+        // Posição e tamanho dos botões
+        btnInformacoes.setBounds(393, 115, 264, 27);
+        btnPacientes.setBounds(393, 158, 264, 27);
+        btnAgendamento.setBounds(393, 200, 264, 27);
+        btnSair.setBounds(477, 265, 89, 29);
+
+        // Adiciona os botões
+        painelPrincipal.add(btnInformacoes);
+        painelPrincipal.add(btnPacientes);
+        painelPrincipal.add(btnAgendamento);
+        painelPrincipal.add(btnSair);
+
+        add(painelPrincipal, BorderLayout.SOUTH);
+
     }
 
     /**
@@ -74,8 +124,18 @@ public class MinhaConta extends javax.swing.JFrame {
         });
 
         jTextField2.setText("Pacientes");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jTextField3.setText("Agendamento/Atendimento");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Sair");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -131,12 +191,23 @@ public class MinhaConta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+         new MinhasInformacoes().setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+         new Pacientes().setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        new Agendamento().setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
