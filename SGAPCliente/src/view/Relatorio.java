@@ -130,24 +130,19 @@ public class Relatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-          int linha = jTable1.getSelectedRow();
+      int resposta = JOptionPane.showConfirmDialog(
+        this,
+        "Deseja excluir o relatório?",
+        "Confirmar exclusão",
+        JOptionPane.YES_NO_OPTION
+    );
 
-    if (linha != -1) {
-
-        DefaultTableModel modelo =
-            (DefaultTableModel) jTable1.getModel();
-
-        modelo.removeRow(linha);
-
-        JOptionPane.showMessageDialog(this,
-            "Registro excluído com sucesso!");
-
-    } else {
+    if (resposta == JOptionPane.YES_OPTION) {
+        jTextArea1.setText("");
 
         JOptionPane.showMessageDialog(this,
-            "Selecione um registro para excluir.");
+            "Relatório excluído com sucesso!");
     }
-}
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -181,7 +176,7 @@ public class Relatorio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Relatorio().setVisible(true);
+                new Relatorio("", "", "", "").setVisible(true);
             }
         });
     }

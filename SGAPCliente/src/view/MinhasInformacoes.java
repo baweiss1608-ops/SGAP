@@ -12,10 +12,21 @@ public class MinhasInformacoes extends javax.swing.JFrame {
     /**
      * Creates new form MinhasInformacoes
      */
-    public MinhasInformacoes() {
-        initComponents();
-    }
+   public MinhasInformacoes() {
+    initComponents();
 
+    jTable1.setModel(new DefaultTableModel(
+        new Object[][]{},
+        new String[]{"Nome", "CPF", "E-mail", "Telefone"}
+    ));
+
+    jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        @Override
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jTable1MouseClicked(evt);
+        }
+    });
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,20 +178,22 @@ private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
 
         int linha = jTable1.getSelectedRow();
 
-        String descricao = jTable1.getValueAt(linha, 0).toString();
+        if (linha != -1) {
 
-        descricao tela = new descricao(descricao);
+            String texto = jTable1.getValueAt(linha, 0).toString();
 
-        tela.setVisible(true);
+            descricao tela = new descricao(texto);
+
+            tela.setVisible(true);
+        }
     }
 }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          new Principal().setVisible(true);
-    this.dispose();
+       this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String nome = JOptionPane.showInputDialog("Digite seu nome:");
+      String nome = JOptionPane.showInputDialog("Digite seu nome:");
     if (nome == null || nome.trim().isEmpty()) return;
 
     String cpf = JOptionPane.showInputDialog("Digite seu CPF:");
@@ -195,7 +208,7 @@ private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
     DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
 
     modelo.addRow(new Object[]{nome, cpf, email, telefone});
-}
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

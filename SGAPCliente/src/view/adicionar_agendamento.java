@@ -131,11 +131,28 @@ public class adicionar_agendamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     String nome = jTextField1.getText();
+    String nome = jTextField1.getText();
+    String horario = jTextField2.getText();
+    String dia = jTextField3.getText();
+    String psicologo = jTextField4.getText();
 
-    Relatorio tela = new Relatorio(nome);
+    if (nome.trim().isEmpty() ||
+        horario.trim().isEmpty() ||
+        dia.trim().isEmpty() ||
+        psicologo.trim().isEmpty()) {
+
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Preencha todos os campos."
+        );
+        return;
+    }
+
+    Relatorio tela = new Relatorio(
+        nome, horario, dia, psicologo
+    );
+
     tela.setVisible(true);
-    tela.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed

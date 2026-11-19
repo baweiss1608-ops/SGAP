@@ -162,12 +162,7 @@ private JTable tabela;
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new TelaAgendamento().setVisible(true);
-        });
-    }
-}
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -354,4 +349,4 @@ private JTable tabela;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-}
+} 
