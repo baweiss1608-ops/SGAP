@@ -4,8 +4,16 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import javax.swing.*;
 import java.awt.*;
+import modelDominio.Psicologo;
+import view.Agendamento;
+import view.MinhasInformacoes;
+import view.Pacientes;
+import view.Principal;
+
+  
 /**
  *
  * @author ferna
@@ -196,9 +204,23 @@ dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonMinhasInformacoes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMinhasInformacoes1ActionPerformed
-         MinhasInformacoes tela = new MinhasInformacoes();
-    tela.setVisible(true);
-    this.dispose();
+        
+
+    Psicologo psicologoLogado = Principal.ccont.getPsicologoLogado();
+
+    if (psicologoLogado != null) {
+
+        MinhasInformacoes tela = new MinhasInformacoes(psicologoLogado);
+        tela.setVisible(true);
+        this.dispose();
+
+    } else {
+
+        JOptionPane.showMessageDialog(this,
+                "Não foi possível localizar os dados do psicólogo.");
+
+    }
+
     }//GEN-LAST:event_jButtonMinhasInformacoes1ActionPerformed
 
     private void jButtonPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPacientesActionPerformed

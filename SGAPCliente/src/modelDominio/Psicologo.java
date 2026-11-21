@@ -167,4 +167,12 @@ public class Psicologo implements Serializable {
                 + cnpj + ", email=" + email + ", senha=" + senha + ", especialidade=" + especialidade + ", horarioInicial=" + 
                 horarioInicial+ ", horarioFinal=" + horarioFinal + ", valor=" + valor + '}';
     }
+
+    public Object getIdPsicologo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Object getValorCobrado() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
