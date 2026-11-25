@@ -13,7 +13,6 @@ import view.MinhasInformacoes;
 import view.Pacientes;
 import view.Principal;
 
-  
 /**
  *
  * @author ferna
@@ -25,7 +24,7 @@ public class MinhaConta extends javax.swing.JFrame {
      */
     public MinhaConta() {
         initComponents();
-         setTitle("SGAP Acolher");
+        setTitle("SGAP Acolher");
         setSize(1057, 570);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -200,39 +199,44 @@ public class MinhaConta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-dispose();
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonMinhasInformacoes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMinhasInformacoes1ActionPerformed
-        
 
-    Psicologo psicologoLogado = Principal.ccont.getPsicologoLogado();
+        try {
+            Psicologo psicologoLogado = Principal.ccont.getPsicologoLogado();
 
-    if (psicologoLogado != null) {
+            if (psicologoLogado != null) {
 
-        MinhasInformacoes tela = new MinhasInformacoes(psicologoLogado);
-        tela.setVisible(true);
-        this.dispose();
+                MinhasInformacoes tela = new MinhasInformacoes(psicologoLogado);
+                tela.setLocationRelativeTo(null);
+                tela.setVisible(true);
+                this.dispose();
 
-    } else {
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Psicólogo não encontrado!");
+            }
 
-        JOptionPane.showMessageDialog(this,
-                "Não foi possível localizar os dados do psicólogo.");
-
-    }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Erro ao abrir a tela: " + e.getMessage());
+            e.printStackTrace();
+        }
 
     }//GEN-LAST:event_jButtonMinhasInformacoes1ActionPerformed
 
     private void jButtonPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPacientesActionPerformed
-          Pacientes tela = new Pacientes();
-    tela.setVisible(true);
-    this.dispose();
+        Pacientes tela = new Pacientes();
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonPacientesActionPerformed
 
     private void jButtonAgendamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendamentosActionPerformed
-          Agendamento tela = new Agendamento();
-    tela.setVisible(true);
-    this.dispose();
+        Agendamento tela = new Agendamento();
+        tela.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonAgendamentosActionPerformed
 
     /**

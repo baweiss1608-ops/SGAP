@@ -37,16 +37,18 @@ private JTable tabela;
         add(cabecalho, BorderLayout.NORTH);
 
         // Painel dos botões
-        JPanel painelBotoes = new JPanel(new GridLayout(1, 3));
+        JPanel painelBotoes = new JPanel(new GridLayout(1, 4));
         painelBotoes.setBackground(lilas);
         painelBotoes.setPreferredSize(new Dimension(0, 80));
 
         JButton btnVoltar = new JButton("Voltar");
         JButton btnAdicionar = new JButton("Adicionar");
+        JButton btnRelatorio = new JButton("Relatório");
         JButton btnExcluir = new JButton("Excluir");
 
         painelBotoes.add(btnVoltar);
         painelBotoes.add(btnAdicionar);
+        painelBotoes.add(btnRelatorio);
         painelBotoes.add(btnExcluir);
 
         // Organiza os botões
@@ -101,6 +103,13 @@ private JTable tabela;
 
         // Botão adicionar
         btnAdicionar.addActionListener(e -> adicionarAgendamento());
+        
+        //botão relatorio
+        btnRelatorio.addActionListener(e -> {
+    AdicionarAgendamento tela = new AdicionarAgendamento();
+    tela.setVisible(true);
+    this.dispose();
+});
 
         // Botão excluir
         btnExcluir.addActionListener(e -> {
@@ -179,6 +188,7 @@ private JTable tabela;
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButtonAdicionarRelatorio = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -210,8 +220,20 @@ private JTable tabela;
         });
 
         jButton2.setText("Adicionar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Excluir");
+
+        jButtonAdicionarRelatorio.setText("Relatório");
+        jButtonAdicionarRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdicionarRelatorioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -220,8 +242,10 @@ private JTable tabela;
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(147, 147, 147)
                 .addComponent(jButton1)
-                .addGap(160, 160, 160)
-                .addComponent(jButton2)
+                .addGap(77, 77, 77)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89)
+                .addComponent(jButtonAdicionarRelatorio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(126, 126, 126))
@@ -237,7 +261,8 @@ private JTable tabela;
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButtonAdicionarRelatorio))
                 .addGap(0, 23, Short.MAX_VALUE))
         );
 
@@ -264,14 +289,13 @@ private JTable tabela;
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(380, 380, 380)
-                        .addComponent(jLabel1)))
+                .addGap(380, 380, 380)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(261, 261, 261))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,9 +303,9 @@ private JTable tabela;
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -299,8 +323,20 @@ private JTable tabela;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        MinhaConta tela = new MinhaConta();
+    tela.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButtonAdicionarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarRelatorioActionPerformed
+       AdicionarAgendamento tela = new AdicionarAgendamento();
+    tela.setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_jButtonAdicionarRelatorioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,6 +378,7 @@ private JTable tabela;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonAdicionarRelatorio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

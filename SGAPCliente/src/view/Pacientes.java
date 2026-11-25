@@ -1,9 +1,12 @@
 
 package view;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import view.TelaPrincipal;
+import modelDominio.Psicologo;
+import view.tablemodel.PsicologoTableModel;
+
 
 /**
  *
@@ -35,7 +38,7 @@ public class Pacientes extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTablePacientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,7 +110,7 @@ public class Pacientes extends javax.swing.JFrame {
 
         jLabel1.setText("Pacientes");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTablePacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -118,7 +121,7 @@ public class Pacientes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTablePacientes);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -163,10 +166,16 @@ public class Pacientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    TelaPrincipal tela = new TelaPrincipal();
+    MinhaConta tela = new MinhaConta();
     tela.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void listarInformacoes() {
+        ArrayList<Psicologo> lista = Principal.ccont.psicologoLista();
+        PsicologoTableModel psicologoTableModel = new PsicologoTableModel(lista);
+        jTablePacientes.setModel(psicologoTableModel);
+    }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        String nome = JOptionPane.showInputDialog(this, "Digite o nome do paciente:");
@@ -193,7 +202,7 @@ public class Pacientes extends javax.swing.JFrame {
         return;
     }
 
-    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+    DefaultTableModel modelo = (DefaultTableModel) jTablePacientes.getModel();
 
     modelo.addRow(new Object[]{nome, cpf, telefone, email});
 
@@ -201,11 +210,11 @@ public class Pacientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         int linha = jTable1.getSelectedRow();
+         int linha = jTablePacientes.getSelectedRow();
 
     if (linha != -1) {
 
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jTablePacientes.getModel();
 
         modelo.removeRow(linha);
 
@@ -264,6 +273,6 @@ public class Pacientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTablePacientes;
     // End of variables declaration//GEN-END:variables
 }

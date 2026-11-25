@@ -1,67 +1,69 @@
-
 package view;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelDominio.Psicologo;
 import javax.swing.table.DefaultTableModel;
 import view.Principal;
+import view.tablemodel.PsicologoTableModel;
 
 /**
  *
  * @author ferna
  */
 public class MinhasInformacoes extends javax.swing.JFrame {
-    
 
     /**
      * Creates new form MinhasInformacoes
      */
-   public MinhasInformacoes() {
-  
-    this(Principal.ccont.getPsicologoLogado());
-    
-  initComponents();
-  
-    jTablePsicologo.setModel(new DefaultTableModel(
-        new Object[][]{},
-        new String[]{
-            "ID", "CRP", "CNPJ", "Especialidade",
-            "Contato", "Horário Inicial", "Horário Final",
-            "Valor", "Nome", "E-mail"
-        }
-    ));
+    public MinhasInformacoes() {
 
-    listarInformacoes();
-}
-  private Psicologo psicologo;
+        this(Principal.ccont.getPsicologoLogado());
 
-public MinhasInformacoes(Psicologo psicologo) {
-    initComponents();
+        initComponents();
 
-    this.psicologo = psicologo;
+        jTablePsicologo.setModel(new DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "ID", "CRP", "CNPJ", "Especialidade",
+                    "Contato", "Horário Inicial", "Horário Final",
+                    "Valor", "Nome", "E-mail"
+                }
+        ));
 
-    jTablePsicologo.setModel(new DefaultTableModel(
-        new Object[][]{},
-        new String[]{
-            "ID", "CRP", "CNPJ", "Especialidade",
-            "Contato", "Horário Inicial", "Horário Final",
-            "Valor", "Nome", "E-mail"
-        }
-    ));
+        listarInformacoes();
+    }
+    private Psicologo psicologo;
 
-    listarInformacoes();
+    private void listarInformacoes() {
+        ArrayList<Psicologo> lista = Principal.ccont.psicologoLista();
+        PsicologoTableModel psicologoTableModel = new PsicologoTableModel(lista);
+        jTablePsicologo.setModel(psicologoTableModel);
+    }
 
-    jTablePsicologo.addMouseListener(new java.awt.event.MouseAdapter() {
-        @Override
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            jTable1MouseClicked(evt);
-        }
-    });
-}
+    public MinhasInformacoes(Psicologo psicologo) {
+        initComponents();
 
+        this.psicologo = psicologo;
 
-    
+        jTablePsicologo.setModel(new DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "ID", "CRP", "CNPJ", "Especialidade",
+                    "Contato", "Horário Inicial", "Horário Final",
+                    "Valor", "Nome", "E-mail"
+                }
+        ));
 
+        listarInformacoes();
+
+        jTablePsicologo.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+               
+            }
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -207,58 +209,51 @@ public MinhasInformacoes(Psicologo psicologo) {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
-
-    if (evt.getClickCount() == 2) {
-
-        int linha = jTablePsicologo.getSelectedRow();
-
-        if (linha != -1) {
-
-            String texto = jTablePsicologo.getValueAt(linha, 0).toString();
-
-            descricao tela = new descricao(texto);
-
-            tela.setVisible(true);
-        }
-    }
-}
+  
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       MinhaConta conta = new MinhaConta();
-    conta.setVisible(true);
-    this.dispose();
+        MinhaConta conta = new MinhaConta();
+        conta.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      String nome = JOptionPane.showInputDialog("Digite seu nome:");
-    if (nome == null || nome.trim().isEmpty()) return;
+        String nome = JOptionPane.showInputDialog("Digite seu nome:");
+        if (nome == null || nome.trim().isEmpty()) {
+            return;
+        }
 
-    String cpf = JOptionPane.showInputDialog("Digite seu CPF:");
-    if (cpf == null || cpf.trim().isEmpty()) return;
+        String cpf = JOptionPane.showInputDialog("Digite seu CPF:");
+        if (cpf == null || cpf.trim().isEmpty()) {
+            return;
+        }
 
-    String email = JOptionPane.showInputDialog("Digite seu e-mail:");
-    if (email == null || email.trim().isEmpty()) return;
+        String email = JOptionPane.showInputDialog("Digite seu e-mail:");
+        if (email == null || email.trim().isEmpty()) {
+            return;
+        }
 
-    String telefone = JOptionPane.showInputDialog("Digite seu telefone:");
-    if (telefone == null || telefone.trim().isEmpty()) return;
+        String telefone = JOptionPane.showInputDialog("Digite seu telefone:");
+        if (telefone == null || telefone.trim().isEmpty()) {
+            return;
+        }
 
-    DefaultTableModel modelo = (DefaultTableModel) jTablePsicologo.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jTablePsicologo.getModel();
 
-    modelo.addRow(new Object[]{nome, cpf, email, telefone});
+        modelo.addRow(new Object[]{nome, cpf, email, telefone});
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int linha = jTablePsicologo.getSelectedRow();
 
-    if (linha != -1) {
-        DefaultTableModel modelo = (DefaultTableModel) jTablePsicologo.getModel();
-        modelo.removeRow(linha);
-    } else {
-        JOptionPane.showMessageDialog(this, "Selecione uma informação para excluir.");
-    }
+        if (linha != -1) {
+            DefaultTableModel modelo = (DefaultTableModel) jTablePsicologo.getModel();
+            modelo.removeRow(linha);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma informação para excluir.");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -309,7 +304,5 @@ private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
     private javax.swing.JTable jTablePsicologo;
     // End of variables declaration//GEN-END:variables
 
-    private void listarInformacoes() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
 }
