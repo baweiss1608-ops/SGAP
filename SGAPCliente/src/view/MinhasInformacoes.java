@@ -1,11 +1,14 @@
 package view;
 
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelDominio.Psicologo;
 import javax.swing.table.DefaultTableModel;
 import view.Principal;
 import view.tablemodel.PsicologoTableModel;
+import java.security.MessageDigest;
+import java.sql.Time;
 
 /**
  *
@@ -17,28 +20,20 @@ public class MinhasInformacoes extends javax.swing.JFrame {
      * Creates new form MinhasInformacoes
      */
     public MinhasInformacoes() {
-
         this(Principal.ccont.getPsicologoLogado());
-
-        initComponents();
-
-        jTablePsicologo.setModel(new DefaultTableModel(
-                new Object[][]{},
-                new String[]{
-                    "ID", "CRP", "CNPJ", "Especialidade",
-                    "Contato", "Horário Inicial", "Horário Final",
-                    "Valor", "Nome", "E-mail"
-                }
-        ));
-
-        listarInformacoes();
     }
+
+    // lista usada pela tabela (mesma ordem das linhas)
+    private ArrayList<Psicologo> listaPsicologos = new ArrayList<>();
     private Psicologo psicologo;
 
     private void listarInformacoes() {
         ArrayList<Psicologo> lista = Principal.ccont.psicologoLista();
-        PsicologoTableModel psicologoTableModel = new PsicologoTableModel(lista);
-        jTablePsicologo.setModel(psicologoTableModel);
+        if (lista == null) {
+            lista = new ArrayList<>();
+        }
+        listaPsicologos = lista;
+        jTablePsicologo.setModel(new PsicologoTableModel(lista));
     }
 
     public MinhasInformacoes(Psicologo psicologo) {
@@ -220,43 +215,99 @@ public class MinhasInformacoes extends javax.swing.JFrame {
 
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String nome = JOptionPane.showInputDialog("Digite seu nome:");
-        if (nome == null || nome.trim().isEmpty()) {
-            return;
+            String crp = pedir("Digite o CRP:");
+    if (crp == null) return;
+    String nome = pedir("Digite o nome:");
+    if (nome == null) return;
+    String contato = pedir("Digite o contato:");
+    if (contato == null) return;
+    String cnpj = pedir("Digite o CNPJ:");
+    if (cnpj == null) return;
+    String email = pedir("Digite o e-mail:");
+    if (email == null) return;
+    String senha = pedir("Digite a senha:");
+    if (senha == null) return;
+    String especialidade = pedir("Digite a especialidade:");
+    if (especialidade == null) return;
+    String inicio = pedir("Horário inicial (HH:mm):");
+    if (inicio == null) return;
+    String fim = pedir("Horário final (HH:mm):");
+    if (fim == null) return;
+    String valorTexto = pedir("Valor da consulta (ex: 50,00):");
+    if (valorTexto == null) return;
+
+    try {
+        Time horarioInicial = Time.valueOf(inicio + ":00");
+        Time horarioFinal = Time.valueOf(fim + ":00");
+        float valor = Float.parseFloat(valorTexto.replace(",", "."));
+
+        Psicologo novo = new Psicologo(crp, nome, contato, cnpj, email,
+                criptografarSenha(senha), especialidade,
+                horarioInicial, horarioFinal, valor);
+
+        boolean ok = Principal.ccont.psicologoInserir(novo);
+
+        if (ok) {
+            JOptionPane.showMessageDialog(this, "Psicólogo cadastrado com sucesso!");
+            listarInformacoes();
+        } else {
+            JOptionPane.showMessageDialog(this, "Não foi possível cadastrar o psicólogo.");
         }
 
-        String cpf = JOptionPane.showInputDialog("Digite seu CPF:");
-        if (cpf == null || cpf.trim().isEmpty()) {
-            return;
-        }
-
-        String email = JOptionPane.showInputDialog("Digite seu e-mail:");
-        if (email == null || email.trim().isEmpty()) {
-            return;
-        }
-
-        String telefone = JOptionPane.showInputDialog("Digite seu telefone:");
-        if (telefone == null || telefone.trim().isEmpty()) {
-            return;
-        }
-
-        DefaultTableModel modelo = (DefaultTableModel) jTablePsicologo.getModel();
-
-        modelo.addRow(new Object[]{nome, cpf, email, telefone});
+    } catch (IllegalArgumentException e) {
+        JOptionPane.showMessageDialog(this, "Horário ou valor inválido! Use HH:mm e números.");
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
+    }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int linha = jTablePsicologo.getSelectedRow();
 
-        if (linha != -1) {
-            DefaultTableModel modelo = (DefaultTableModel) jTablePsicologo.getModel();
-            modelo.removeRow(linha);
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione uma informação para excluir.");
-        }
+    int linha = jTablePsicologo.getSelectedRow();
+
+    if (linha == -1 || linha >= listaPsicologos.size()) {
+        JOptionPane.showMessageDialog(this, "Selecione um psicólogo para excluir.");
+        return;
+    }
+
+    Psicologo escolhido = listaPsicologos.get(linha);
+
+    int confirmar = JOptionPane.showConfirmDialog(this,
+            "Excluir o psicólogo " + escolhido.getNome() + "?",
+            "Confirmar exclusão", JOptionPane.YES_NO_OPTION);
+    if (confirmar != JOptionPane.YES_OPTION) {
+        return;
+    }
+
+    boolean ok = Principal.ccont.psicologoExcluir(new Psicologo(escolhido.getCodPsicologo()));
+
+    if (ok) {
+        listarInformacoes();
+    } else {
+        JOptionPane.showMessageDialog(this, "Não foi possível excluir o psicólogo.");
+    }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+
+private String pedir(String mensagem) {
+    String texto = JOptionPane.showInputDialog(this, mensagem);
+    if (texto == null || texto.trim().isEmpty()) {
+        return null;
+    }
+    return texto.trim();
+}
+
+private String criptografarSenha(String senha) throws Exception {
+    MessageDigest md = MessageDigest.getInstance("SHA-256");
+    byte[] hash = md.digest(senha.getBytes("UTF-8"));
+    StringBuilder sb = new StringBuilder();
+    for (byte b : hash) {
+        sb.append(String.format("%02x", 0xFF & b));
+    }
+    return sb.toString();
+}
     /**
      * @param args the command line arguments
      */
