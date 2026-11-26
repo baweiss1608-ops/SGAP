@@ -309,6 +309,7 @@ private Time converterHorario(String horario) {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldCrpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCrpActionPerformed
@@ -421,6 +422,42 @@ Psicologo novoPsicologo = new Psicologo(
 
 
             result = Principal.ccont.psicologoInserir(psicologoInserir);
+        } if (psicologo != null) {
+
+            // Edição de psicólogo
+            Psicologo psicologoEditar = new Psicologo(
+                    psicologo.getCodPsicologo(),
+                    crp,
+                    nome,
+                    contato,
+                    cnpj,
+                    email,
+                    senhaCriptografada,
+                    especialidade,
+                    horarioInicial,
+                    horarioFinal,
+                    valor
+            );
+
+            result = Principal.ccont.psicologoEditar(psicologoEditar);
+
+        } else {
+
+            // Cadastro de novo psicólogo
+            Psicologo novoPsicologo = new Psicologo(
+                    crp,
+                    nome,
+                    contato,
+                    cnpj,
+                    email,
+                    senhaCriptografada,
+                    especialidade,
+                    horarioInicial,
+                    horarioFinal,
+                    valor
+            );
+
+            result = Principal.ccont.psicologoInserir(novoPsicologo);
         }
 
     } catch (NumberFormatException e) {
